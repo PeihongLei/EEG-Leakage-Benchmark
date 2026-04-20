@@ -2,10 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Rethinking Data Leakage in EEG-Based Emotion Recognition">
-  <meta name="keywords" content="EEG, Emotion Recognition, Data Leakage, Benchmark">
+  <meta name="description" content="Impact of Trial-wise and Test Data Leakage on EEG-Based Emotion Classification">
+  <meta name="keywords" content="EEG, Emotion Recognition, Data Leakage, Benchmark, DEAP">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rethinking Data Leakage in EEG-Based Emotion Recognition</title>
+  <title>Impact of Trial-wise and Test Data Leakage on EEG-Based Emotion Classification</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
@@ -21,39 +21,49 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
 
-          <h1 class="title is-1 publication-title">Rethinking Data Leakage in EEG-Based Emotion Recognition: A Benchmark Study</h1>
+          <h1 class="title is-1 publication-title">Impact of Trial-wise and Test Data Leakage on EEG-Based Emotion Classification</h1>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><strong>Peihong Lei</strong><sup>1</sup>,</span>
-            <!-- 如果有其他作者，按这个格式添加 -->
-            <span class="author-block">Your Advisor Name<sup>1</sup></span>
+            <span class="author-block">Mengyao Wu<sup>1</sup>,</span>
+            <span class="author-block">Wenjun Ying<sup>1</sup>,</span>
+            <span class="author-block">Hanlin Mo<sup>1</sup></span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Xidian University</span>
+            <span class="author-block"><sup>1</sup>Xidian University, Xi'an, China</span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block" style="color:#e74c3c; font-weight:bold;">IJCAI 2025 Workshop</span>
+            <span class="author-block" style="color:#e74c3c; font-weight:bold;">4DMR Workshop @ IJCAI 2025 &​nbsp;|&​nbsp; CEUR-WS Vol-4115</span>
           </div>
 
           <br>
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- 论文PDF链接，替换为你的实际链接 -->
+              <!-- PDF下载（仓库内PDF） -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/你的arxiv编号" class="external-link button is-normal is-rounded is-dark">
+                <a href="./static/pdfs/EEG_Leakage_Benchmark.pdf" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>Paper</span>
+                  <span>Paper (PDF)</span>
                 </a>
               </span>
-              <!-- 代码链接，如果有的话 -->
+              <!-- CEUR-WS官方链接 -->
               <span class="link-block">
-                <a href="https://github.com/你的用户名/你的代码仓库" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://ceur-ws.org/Vol-4115/paper7.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-globe"></i></span>
+                  <span>CEUR-WS</span>
+                </a>
+              </span>
+              <!-- 代码链接，如有就填，没有可以先注释掉 -->
+              <!--
+              <span class="link-block">
+                <a href="https://github.com/PeihongLei/EEG-Leakage-Benchmark" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fab fa-github"></i></span>
                   <span>Code</span>
                 </a>
               </span>
+              -->
             </div>
           </div>
 
@@ -63,7 +73,7 @@
   </div>
 </section>
 
-<!-- 摘要 -->
+<!-- Abstract -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -71,8 +81,17 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            <!-- 把你的论文摘要粘贴在这里 -->
-            EEG-based emotion recognition has achieved remarkable accuracy in recent studies. However, many existing works overlook a critical issue: data leakage caused by segment-level data splitting. In this work, we systematically investigate the impact of different data splitting strategies — trial-wise splitting vs. segment-leak splitting — on model performance. Our experiments on the DEAP dataset reveal that segment-leak splitting leads to artificially inflated accuracy (90%+), while the rigorous trial-wise splitting yields significantly lower but more realistic results (20-30%). We provide a comprehensive benchmark and advocate for standardized evaluation protocols to ensure fair comparison in EEG emotion recognition research.
+            EEG-based emotion recognition has achieved remarkable performance in recent studies.
+            However, many existing works overlook critical issues in dataset handling that can lead to
+            overly optimistic results. This paper systematically investigates how different types of data
+            leakage — <strong>trial-wise leakage</strong> and <strong>test data leakage</strong> — affect EEG-based emotion
+            classification. We design controlled experiments to quantify the impact of each leakage
+            scenario on model performance and demonstrate how improper dataset splitting can
+            mislead conclusions about model effectiveness. Our experiments on the DEAP dataset
+            reveal that segment-level splitting (which causes data leakage) leads to artificially
+            inflated accuracy exceeding 90%, while rigorous trial-wise splitting yields significantly
+            lower but more realistic results around 20–30%. These findings highlight the urgent need
+            for standardized evaluation protocols in EEG-based emotion recognition research.
           </p>
         </div>
       </div>
@@ -80,32 +99,45 @@
   </div>
 </section>
 
-<!-- 方法/核心发现 -->
+<!-- Key Findings -->
 <section class="section">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Key Findings</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <ul>
+            <li><strong>Trial-wise Leakage:</strong> When segments from the same trial appear in both training and test sets, the model memorizes trial-specific patterns rather than learning generalizable emotion features, resulting in inflated accuracy (90%+).</li>
+            <li><strong>Test Data Leakage:</strong> Improper data normalization or feature extraction using statistics from the entire dataset (including test data) further contaminates evaluation results.</li>
+            <li><strong>Realistic Baseline:</strong> Under rigorous trial-wise splitting with proper data isolation, EEGNet achieves only ~20–30% accuracy on the DEAP dataset, suggesting that current state-of-the-art claims may need re-evaluation.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <div class="columns is-centered">
       <div class="column is-full-width has-text-centered">
-        <!-- 替换为你的方法图/结果图 -->
-        <img src="./static/images/pipeline.png" alt="Data splitting comparison" style="max-width:80%;">
-        <p class="has-text-centered" style="margin-top:10px;">
-          Comparison of trial-wise splitting (left) vs. segment-leak splitting (right). Segment-leak splitting causes data from the same trial to appear in both training and test sets, leading to artificially inflated performance.
+        <!-- 替换为你论文中的数据泄漏示意图 -->
+        <img src="./static/images/pipeline.png" alt="Data splitting comparison" style="max-width:85%;">
+        <p class="has-text-centered" style="margin-top:10px; color:#666;">
+          Figure: Comparison of trial-wise splitting (no leakage) vs. segment-level splitting (with leakage). Segment-level splitting causes data from the same trial to appear in both training and test sets.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 实验结果 -->
+<!-- Experimental Results -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Experimental Results</h2>
     <div class="columns is-centered">
       <div class="column is-full-width has-text-centered">
-        <!-- 替换为你的实验结果图/表格 -->
-        <img src="./static/images/results.png" alt="Experimental results" style="max-width:80%;">
-        <p class="has-text-centered" style="margin-top:10px;">
-          Performance comparison across different splitting strategies on the DEAP dataset.
+        <!-- 替换为你的实验结果图/表格截图 -->
+        <img src="./static/images/results.png" alt="Experimental results" style="max-width:85%;">
+        <p class="has-text-centered" style="margin-top:10px; color:#666;">
+          Performance comparison across different splitting strategies on the DEAP dataset using EEGNet. Segment-leak splitting yields artificially high accuracy, while trial-wise splitting reveals the true model capability.
         </p>
       </div>
     </div>
@@ -116,11 +148,16 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{lei2025rethinking,
-  title={Rethinking Data Leakage in EEG-Based Emotion Recognition: A Benchmark Study},
-  author={Lei, Peihong},
-  booktitle={IJCAI 2025 Workshop},
-  year={2025}
+    <pre><code>@inproceedings{lei2025impact,
+  title={Impact of Trial-wise and Test Data Leakage on EEG-Based Emotion Classification},
+  author={Lei, Peihong and Wu, Mengyao and Ying, Wenjun and Mo, Hanlin},
+  booktitle={Proceedings of the 1st Workshop on 4D Micro-Expression Recognition (4DMR 2025) at IJCAI 2025},
+  series={CEUR Workshop Proceedings},
+  volume={4115},
+  pages={69--77},
+  year={2025},
+  publisher={CEUR-WS.org},
+  url={https://ceur-ws.org/Vol-4115/paper7.pdf}
 }</code></pre>
   </div>
 </section>
