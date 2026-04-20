@@ -9,7 +9,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
 </head>
@@ -26,16 +26,12 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><strong>Peihong Lei</strong><sup>1</sup>,</span>
             <span class="author-block">Mengyao Wu<sup>1</sup>,</span>
-            <span class="author-block">Wenjun Ying<sup>1</sup>,</span>
-            <span class="author-block">Hanlin Mo<sup>1</sup></span>
+            <span class="author-block">Wenjun Yi<sup>1</sup>,</span>
+            <span class="author-block">Hanlin Mo<sup>1,*</sup></span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Xidian University, Xi'an, China</span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block" style="color:#e74c3c; font-weight:bold;">4DMR Workshop @ IJCAI 2025 &​nbsp;|&​nbsp; CEUR-WS Vol-4115</span>
+            <span class="author-block" style="color:#e74c3c; font-weight:bold;">4DMR Workshop @ IJCAI 2025 | CEUR-WS Vol-4115</span>
           </div>
 
           <br>
@@ -55,7 +51,7 @@
                   <span>CEUR-WS</span>
                 </a>
               </span>
-              <!-- 代码链接，如有就填，没有可以先注释掉 -->
+              <!-- 代码链接 -->
               <!--
               <span class="link-block">
                 <a href="https://github.com/PeihongLei/EEG-Leakage-Benchmark" class="external-link button is-normal is-rounded is-dark">
@@ -98,9 +94,9 @@
       <div class="column is-full-width">
         <div class="content has-text-justified">
           <ul>
-            <li><strong>Trial-wise Leakage:</strong> When segments from the same trial appear in both training and test sets, the model memorizes trial-specific patterns rather than learning generalizable emotion features, resulting in inflated accuracy (90%+).</li>
+            <li><strong>Trial-wise Leakage:</strong> When segments from the same trial appear in both training and test sets, the model memorizes trial-specific patterns rather than learning generalizable emotion features, resulting in inflated accuracy (~49–90%).</li>
             <li><strong>Test Data Leakage:</strong> Improper data normalization or feature extraction using statistics from the entire dataset (including test data) further contaminates evaluation results.</li>
-            <li><strong>Realistic Baseline:</strong> Under rigorous trial-wise splitting with proper data isolation, EEGNet achieves only ~20–30% accuracy on the DEAP dataset, suggesting that current state-of-the-art claims may need re-evaluation.</li>
+            <li><strong>Realistic Baseline:</strong> Under rigorous trial-wise splitting with proper data isolation, EEGNet achieves only ~26–43% accuracy on the DEAP dataset, suggesting that current state-of-the-art claims may need re-evaluation.</li>
           </ul>
         </div>
       </div>
@@ -108,7 +104,6 @@
 
     <div class="columns is-centered">
       <div class="column is-full-width has-text-centered">
-        <!-- 替换为你论文中的数据泄漏示意图 -->
         <img src="./static/images/pipeline.png" alt="Data splitting comparison" style="max-width:85%;">
         <p class="has-text-centered" style="margin-top:10px; color:#666;">
           <strong>Figure 1.</strong> Four experimental configurations based on different data partitioning and training strategies are designed, including normal setting, test data leakage, trial-wise leakage, and combined data leakage.
@@ -129,7 +124,7 @@
       <div class="column is-full-width has-text-centered">
         <img src="./static/images/table1.png" alt="Trial-wise splitting results" style="max-width:85%;">
         <p class="has-text-centered" style="margin-top:10px; color:#666;">
-          <strong>Table 1.</strong> Subject-wise classification results under <em>trial-wise splitting</em> (no data leakage) on the DEAP dataset. Test accuracy ranges from 3.75% to 79.17%, with an overall average far below chance expectations set by leaked benchmarks.
+          <strong>Table 1.</strong> Performance comparison of <strong>valence classification</strong> for 6 models under 4 data leakage conditions (ACC and F1-Score, format: mean ± standard deviation)
         </p>
       </div>
     </div>
@@ -139,7 +134,7 @@
       <div class="column is-full-width has-text-centered">
         <img src="./static/images/table2.png" alt="Segment-leak splitting results" style="max-width:85%;">
         <p class="has-text-centered" style="margin-top:10px; color:#666;">
-          <strong>Table 2.</strong> Subject-wise classification results under <em>segment-leak splitting</em> on the DEAP dataset. Due to data leakage, the model achieves inflated accuracy (64%–100%), creating a misleading impression of high performance.
+          <strong>Table 2.</strong> Performance comparison of <strong>arousal classification</strong> for 6 models under 4 data leakage conditions (ACC and F1-Score, format: mean ± standard deviation)
         </p>
       </div>
     </div>
@@ -149,7 +144,7 @@
       <div class="column is-full-width has-text-centered">
         <img src="./static/images/table3.png" alt="Comparison summary" style="max-width:85%;">
         <p class="has-text-centered" style="margin-top:10px; color:#666;">
-          <strong>Table 3.</strong> Summary comparison of average accuracy and F1-score across all 32 subjects under the two splitting strategies. The segment-leak strategy yields dramatically higher metrics, confirming that data leakage is the dominant factor behind inflated performance.
+          <strong>Table 3.</strong> Average performance improvement due to data leakage across all models (format: mean ± standard deviation)
         </p>
       </div>
     </div>
